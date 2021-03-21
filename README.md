@@ -1,17 +1,17 @@
 # README
 
-Rock-Paper-Scissors API
-Requirements
-Ruby 3.0.0
-Ruby on Rails 6.1.3
-I had problems installing PostgreeSQL 
-Installation
+# Rock-Paper-Scissors API
+# Requirements
+* Ruby 3.0.0
+* Ruby on Rails 6.1.3
+I had problems installing PostgreeSQL so I had to use SQLLite
+# Installation
 Run the following in your project dir
 bundle install
-Running tests
+# Running tests
 Run the following in your project dir
 bundle exec rspec
-Usage
+# Usage
 Run the following in your project dir
 rails s
 To test the API you can send the following sentences:
