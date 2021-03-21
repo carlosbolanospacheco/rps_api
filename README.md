@@ -15,13 +15,19 @@ Run the following in your project dir
 rails s
 
 To play a new game
-```curl --header "Content-Type: application/json" --request GET --data '{"name":"Ponky", "move":"rock"}' http://localhost:3000/api/v1/play```
+```
+curl --header "Content-Type: application/json" --request GET --data '{"name":"Ponky", "move":"rock"}' http://localhost:3000/api/v1/play
+```
 
 An example of answer to a game is:
-```{"date":"2021-03-21T17:38:06","moves":[{"name":"Dan Brown","move":"paper"},{"name":"Bot","move":"scissors"}],"winner":"Winner is bot"}```
+```
+{"date":"2021-03-21T17:38:06","moves":[{"name":"Dan Brown","move":"paper"},{"name":"Bot","move":"scissors"}],"winner":"Winner is bot"}
+```
 
 To get the list of existing games. You can indicate the offset to paginate the results
-```curl --request GET --header "Content-Type: application/json" --data '{"offset":2}' http://localhost:3000/api/v1/get_history```
+```
+curl --request GET --header "Content-Type: application/json" --data '{"offset":2}' http://localhost:3000/api/v1/get_history
+```
 
 An of a list of games is:
 ```
