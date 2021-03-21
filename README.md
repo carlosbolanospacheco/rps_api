@@ -4,7 +4,7 @@
 * Ruby 3.0.0
 * Ruby on Rails 6.1.3
 
-I had problems installing PostgreeSQL so I had to use SQLLite
+I had problems installing PostgreeSQL so I had to use SQLite3
 ## Installation
 Run the following in your project dir
 bundle install
