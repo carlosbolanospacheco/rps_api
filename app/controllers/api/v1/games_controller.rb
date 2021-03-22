@@ -2,13 +2,14 @@ module Api
   module V1
     class GamesController < ApplicationController
       include RockPaperScissors
+      rescue_from ActionController::ParameterMissing, with: :parameter_missing
       # Max number of games that are sent for one request
       MAX_GAMES_LIST = 20
 
       def play
-        if !params[:name] then
-          render json: {error: 'Must indicate user name'}, status: :method_not_allowed
-        elsif RockPaperScissors::RPS_Game.instance.valid_move?(params[:move]) then
+        params.require(:name)
+        params.require(:move)
+        if RockPaperScissors::RPS_Game.instance.valid_move?(params[:move]) then
           bot_move = RockPaperScissors::RPS_Game.instance.make_move
           winner = RockPaperScissors::RPS_Game.instance.winner?(user_move: params[:move], 
                                                                 bot_move: bot_move, 
@@ -36,6 +37,10 @@ module Api
           params.fetch(params[:limit], MAX_GAMES_LIST).to_i,
           MAX_GAMES_LIST
         ].min
+      end
+
+      def parameter_missing(e)
+        render json: { error: e.message}, status: :unprocessable_entity
       end
     end
   end

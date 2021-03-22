@@ -5,8 +5,14 @@ RSpec.describe "Games", type: :request do
   describe "Errors" do
     it "Tries to play without user name" do
       get "/api/v1/play", params: { move: 'rock' }
-      expect(response).to have_http_status(:method_not_allowed)
-      expect(JSON.parse(response.body)).to eq({'error'=> 'Must indicate user name'})
+      expect(response).to have_http_status(:unprocessable_entity)
+      #expect(JSON.parse(response.body)).to eq({'error'=> 'Must indicate user name'})
+    end
+
+    it "Tries to play without a move" do
+      get "/api/v1/play", params: { name: 'John Doe' }
+      expect(response).to have_http_status(:unprocessable_entity)
+      #expect(JSON.parse(response.body)).to eq({'error'=> 'Must indicate user name'})
     end
 
     it "Tries to play with a wrong move" do
