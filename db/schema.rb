@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_20_110301) do
+ActiveRecord::Schema.define(version: 2021_03_24_094733) do
 
   create_table "games", force: :cascade do |t|
     t.string "user"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 2021_03_20_110301) do
     t.string "move"
     t.string "bot_move"
     t.string "winner"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

@@ -1,10 +1,13 @@
 module Api 
   module V1
     class GamesController < ApplicationController
+      include ActionController::HttpAuthentication::Token
       include RockPaperScissors
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
       # Max number of games that are sent for one request
       MAX_GAMES_LIST = 20
+
+      before_action :authenticate_user, only: [ :get_history ]
 
       def play
         params.require(:name)
@@ -31,6 +34,14 @@ module Api
       end
 
       private
+
+      def authenticate_user
+        token, _options = token_and_options(request)
+        user_id = AuthenticationTokenService.decode(token)
+        User.find(user_id)
+      rescue ActiveRecord::RecordNotFound
+        head :unauthorized
+      end
 
       def limit
         [

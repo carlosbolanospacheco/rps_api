@@ -34,7 +34,10 @@ RSpec.describe "Games", type: :request do
 
   describe "GET /get_history" do
     it "Gets list of historical games" do
-      get "/api/v1/get_history", params: { limit: 1, offset: 2 }
+      FactoryBot.create(:user, username:'my_user', password: '123')
+      get "/api/v1/get_history", 
+          params: { limit: 1, offset: 2 }, 
+          headers: { "Authorization" => "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.DiPWrOKsx3sPeVClrm_j07XNdSYHgBa3Qctosdxax3w"}
       expect(response).to have_http_status(:ok)
     end
   end

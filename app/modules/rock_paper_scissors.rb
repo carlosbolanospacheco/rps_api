@@ -4,7 +4,7 @@ module RockPaperScissors
         include Singleton
 
         # JSON with the possible moves and the option that is beaten by each move
-        MOVES={rock: :scissors, paper: :rock, scissors: :paper}.freeze
+        MOVES={rock: [:scissors, :lizard], paper: [:rock, :spock], scissors: [:paper], spock: [:rock, :scissors], lizard: [:spock, :paper]}.freeze
         
         def valid_move?(move)
             MOVES.key?(move.to_sym)
@@ -19,7 +19,7 @@ module RockPaperScissors
         end
 
         def beats?(user_move:, bot_move:)
-            MOVES[user_move.to_sym] == bot_move.to_sym
+            MOVES[user_move.to_sym].include?(bot_move.to_sym)
         end
 
         def winner?(user_move:, bot_move:, user_name:)
